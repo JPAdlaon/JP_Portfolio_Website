@@ -46,6 +46,9 @@ body{
     -webkit-tap-highlight-color: transparent;
     padding: 5vh 15px;
 }
+body.hide-scrolling{
+    overflow-y: hidden;
+}
 body::before{
     content: '';
     position: fixed;
@@ -84,6 +87,11 @@ section{
 .main{
     max-width: 1200px;
     margin: auto;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+}
+.main.fade-out{
+    opacity: 0;
 }
 .container{
     padding: 0 40px;
@@ -101,6 +109,9 @@ section{
 }
 .sec-padding{
     padding: 80px 0;
+}
+.flex-end{
+    justify-content: flex-end;
 }
 /* Section Title */
 .section-title{
@@ -165,7 +176,57 @@ button{
 .btn:hover{
     color: var(--white);
 }
-
+/* Header */
+.header{
+    /* background-color: red; */
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding: 20px 0 0;
+}
+.header .nav-toggler{
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: var(--white-alpha-25);
+    border: 1px solid var(--white-alpha-40);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+}
+.header .nav-toggler span{
+    height: 2px;
+    width: 24px;
+    background-color: var(--main-color);
+    position: relative;
+}
+.header .nav-toggler span::before,
+.header .nav-toggler span::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color);
+    transition: all 0.3s ease;
+}
+.header .nav-toggler span::before{
+    left: 0;
+    transform: translateY(-8px);
+}
+.header .nav-toggler span::after{
+    right: 0;
+    transform: translateY(8px);
+}
+.header .nav-toggler:hover span::before,
+.header .nav-toggler:hover span::after{
+    width: 50%;
+}
 /* --------------------
 Home Section
 -------------------- */
@@ -383,6 +444,9 @@ Portfolio Section
     width: 100%;
     z-index: 200;
     visibility: hidden;
+}
+.portfolio-popup.open{
+    visibility: visible;
     overflow-y: auto;
 }
 .pp-inner{
@@ -400,6 +464,13 @@ Portfolio Section
     width: 100%;
     border: 1px solid var(--white-alpha-40);
     backdrop-filter: var(--backdrop-filter-blur);
+    opacity: 0;
+    transform: scale(0.9);
+}
+.portfolio-popup.open .pp-content{
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.5s ease;
 }
 .pp-header{
     position: relative;
@@ -438,3 +509,69 @@ Portfolio Section
     text-transform: lowercase;
     color: var(--main-color);
 }
+
+/* Contact Section */
+.contact-form,
+.contact-info{
+    width: 50%;
+    padding: 0 15px;
+}
+.contact-form .input-group{
+    width: 100%;
+    margin-bottom: 30px;
+}
+.contact-form .input-control::placeholder{
+    color: var(--blue-dark);
+    opacity: 0.8;
+    font-weight: 300;
+}
+.contact-form .input-control{
+    display: block;
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    font-family: inherit;
+    font-weight: 400;
+    font-size: 16px;
+    background-color: var(--white-alpha-25);
+    padding: 0 20px;
+    color: var(--blue-dark);
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+.contact-form .input-control:focus{
+    border-color: var(--white-alpha-40);
+}
+.contact-form textarea.input-control{
+    height: 120px;
+    resize: none;
+    padding-top: 15px;
+}
+.contact-info-item{
+    margin: 0 0 30px;
+    padding: 0 0 0 20px;
+}
+.contact-info-item h3{
+    font-size: 20px;
+    text-transform: capitalize;
+    margin: 0 0 5px;
+}
+.contact-info-item .social-links a{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    background-color: var(--white-alpha-25);
+    border: var(--white-alpha-40);
+    color: var(--main-color);
+    border-radius: 50%;
+    margin: 6px 4px 0 0;
+    transition: all 0.3s ease;
+}
+.contact-info-item .social-links a:hover{
+    color: var(--white);
+    background-color: var(--main-color);
+}
+
